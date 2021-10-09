@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core'
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { useState } from 'react';
+import Link from 'next/link';
 
 /* ・TODOタイトル候補<br />
 ・TODO作成 */
@@ -52,9 +53,12 @@ export default function Home() {
                     margin="normal"
                     onClick={addTaskToTodos}
                 >追加</Button>
+                <Link href="/todos">
+                    todo一覧へ
+                </Link>
                 {todos.map((todo, index)=>{
                     return (
-                        <p>{todo.title}:{todo.content}</p>
+                        <p>{`${todo.title}:${todo.content}`}</p>    
                     )
                 })}
                 </Grid>

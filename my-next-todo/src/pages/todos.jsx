@@ -8,6 +8,15 @@ export default function Home() {
     return (
         <>
             <List component="nav">
+                {todos.map((todo, index)=>{
+                    return (
+                        <ListItem>
+                            <Checkbox />
+                            <ListItemText primary={`${todo.title}:${todo.content}`} />
+                            <MoreVert />
+                        </ListItem>
+                    )
+                })}
                 <ListItem>
                     <Checkbox />
                     <ListItemText primary="TODO詳細遷移" />
