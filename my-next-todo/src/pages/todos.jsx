@@ -3,12 +3,27 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Checkbox } from "@material-ui/core";
 import MoreVert from "@bit/mui-org.material-ui-icons.more-vert";
+import { db } from '../../lib/db';
+import { collection, getDocs } from 'firebase/firestore/lite';
+
+async function getTodos(db) {
+    const todosCol = collection(db, 'todos');
+    const todoSnapshot = await getDocs(todosCol);
+    const todoList = todoSnapshot.docs.map(doc => doc.data());
+    console.log(todoList)
+    return todoList;
+}
 
 export default function Home() {
+    const handleClickFetchButton = () => {
+        console.log(getTodos(db))
+        console.log(process.env)
+    }
     return (
         <>
             <List component="nav">
-                {todos.map((todo, index)=>{
+                <button onClick={handleClickFetchButton}>取得</button>
+                {/* {todos.map((todo, index)=>{
                     return (
                         <ListItem>
                             <Checkbox />
@@ -16,7 +31,7 @@ export default function Home() {
                             <MoreVert />
                         </ListItem>
                     )
-                })}
+                })} */}
                 <ListItem>
                     <Checkbox />
                     <ListItemText primary="TODO詳細遷移" />
