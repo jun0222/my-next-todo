@@ -7,22 +7,20 @@ import { db } from '../../lib/db';
 import { collection, getDocs } from 'firebase/firestore/lite';
 
 async function getTodos(db) {
-    const todosCol = collection(db, 'todos');
-    const todoSnapshot = await getDocs(todosCol);
-    const todoList = todoSnapshot.docs.map(doc => doc.data());
-    console.log(todoList)
-    return todoList;
+        const querySnapshot = await getDocs(collection(db, "todos"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            console.log(doc.data().title)
+            console.log(doc.data().content)
+        });
 }
+getTodos(db)
 
 export default function Home() {
-    const handleClickFetchButton = () => {
-        console.log(getTodos(db))
-        console.log(process.env)
-    }
     return (
         <>
             <List component="nav">
-                <button onClick={handleClickFetchButton}>取得</button>
                 {/* {todos.map((todo, index)=>{
                     return (
                         <ListItem>
