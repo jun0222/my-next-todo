@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -6,32 +7,36 @@ import MoreVert from "@bit/mui-org.material-ui-icons.more-vert";
 import { db } from '../../lib/db';
 import { collection, getDocs } from 'firebase/firestore/lite';
 
-const todos = [];
-
-async function getTodosAll(db, todos) {
-    const querySnapshot = await getDocs(collection(db, "todos"));
-    querySnapshot.forEach((doc) => {
-        const todo = {title: doc.data().title, content: doc.data().content};
-        todos.push(todo);
-        return todos;
-    });
-}
-getTodosAll(db, todos);
 
 export default function Home() {
+    const [todos, setTodos] = useState([]);
 
+    const fetchButton = async () => {
+        const querySnapshot = await getDocs(collection(db, "todos"));
+
+        const _todos = [];
+        querySnapshot.forEach((doc) => {
+            _todos.push({
+                ...doc.data()
+            });
+        });
+        setTodos(_todos)
+    };
+    const todoListItems = todos.map(todo => {
+        return (
+            // keyを設定していないので、idなどを作り設定予定
+            <ListItem>
+                <Checkbox />
+                <ListItemText primary={`${todo.title}：${todo.content}`} />
+                <MoreVert />
+            </ListItem>
+        )
+    })
     return (
         <>
             <List component="nav">
-                {todos.map((todo, index)=>{
-                    return (
-                        <ListItem key={index}>
-                            <Checkbox />
-                            <ListItemText primary={`${todo.title}：${todo.content}`} />
-                            <MoreVert />
-                        </ListItem>
-                    )
-                })}
+            <button onClick={fetchButton}>取得</button>
+            <div>{todoListItems}</div>
             </List>
         </>
     )
