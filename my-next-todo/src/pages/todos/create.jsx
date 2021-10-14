@@ -3,6 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { useState } from 'react';
 import Link from 'next/link';
+import { db } from '../../../lib/db';
+import { doc, setDoc } from "firebase/firestore";
 
 /* ・TODOタイトル候補<br />
 ・TODO作成 */
@@ -13,7 +15,7 @@ export default function Home() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const addTaskToTodos = () => {
+    const addTaskToTodos = async () => {
         if (title === "" || content === "" ){
             return
         };
@@ -22,6 +24,12 @@ export default function Home() {
 
         const newTodos = [...todos, todo];
         setTodos(newTodos);
+
+        // firestoreへデータを保存
+        await setDoc(doc(db, "todos", "LA"), {
+            title: title,
+            content: content
+        }, {merge: true});
 
         setTodo({});
         setTitle('');
