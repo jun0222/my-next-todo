@@ -16,7 +16,12 @@ export default function Home() {
     const [content, setContent] = useState('');
 
     const addTaskToTodos = async () => {
-        if (title === "" || content === "" ){
+        if (title === ""){
+            window.alert('タイトルが未入力です')
+            return
+        };
+        if (content === "" ){
+            window.alert('内容が未入力です')
             return
         };
         setTodo(todo.title = title);
