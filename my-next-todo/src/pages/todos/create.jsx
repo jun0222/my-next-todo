@@ -36,6 +36,8 @@ export default function Home() {
             content: content
         }, {merge: true});
 
+        window.alert(`以下のタスクを登録しました。\n\nタイトル：${title}\n内容：${content}`);
+
         setTodo({});
         setTitle('');
         setContent('');
@@ -79,11 +81,6 @@ export default function Home() {
                         todo一覧へ
                     </Link>
                 </Button>
-                {todos.map((todo, index)=>{
-                    return (
-                        <p>{`${todo.title}:${todo.content}`}</p>    
-                    )
-                })}
                 </Grid>
             </Grid>
         </>
