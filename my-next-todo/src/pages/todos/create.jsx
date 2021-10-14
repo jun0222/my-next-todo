@@ -53,9 +53,16 @@ export default function Home() {
                     margin="normal"
                     onClick={addTaskToTodos}
                 >追加</Button>
-                <Link href="/todos">
-                    todo一覧へ
-                </Link>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    margin="normal"
+                >
+                    <Link href="/todos">
+                        todo一覧へ
+                    </Link>
+                </Button>
                 {todos.map((todo, index)=>{
                     return (
                         <p>{`${todo.title}:${todo.content}`}</p>    
