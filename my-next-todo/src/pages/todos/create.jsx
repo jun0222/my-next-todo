@@ -14,6 +14,9 @@ export default function Home() {
     const [content, setContent] = useState('');
 
     const addTaskToTodos = () => {
+        if (title === "" || content === "" ){
+            return
+        };
         setTodo(todo.title = title);
         setTodo(todo.content = content);
 
