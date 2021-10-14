@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 import { useState } from 'react';
 import Link from 'next/link';
 import { db } from '../../../lib/db';
-import { doc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 /* ・TODOタイトル候補<br />
 ・TODO作成 */
@@ -26,7 +26,7 @@ export default function Home() {
         setTodos(newTodos);
 
         // firestoreへデータを保存
-        await setDoc(doc(db, "todos", "LA"), {
+        await addDoc(collection(db, "todos"), {
             title: title,
             content: content
         }, {merge: true});
