@@ -10,8 +10,6 @@ import { collection, addDoc } from "firebase/firestore";
 ・TODO作成 */
 
 export default function Home() {
-    const [todos, setTodos] = useState([]);
-    const [todo, setTodo] = useState({});
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -24,11 +22,6 @@ export default function Home() {
             window.alert('内容が未入力です')
             return
         };
-        setTodo(todo.title = title);
-        setTodo(todo.content = content);
-
-        const newTodos = [...todos, todo];
-        setTodos(newTodos);
 
         // firestoreへデータを保存
         await addDoc(collection(db, "todos"), {
@@ -38,7 +31,6 @@ export default function Home() {
 
         window.alert(`以下のタスクを登録しました。\n\nタイトル：${title}\n内容：${content}`);
 
-        setTodo({});
         setTitle('');
         setContent('');
     }
