@@ -6,6 +6,7 @@ import { Checkbox } from "@material-ui/core";
 import MoreVert from "@bit/mui-org.material-ui-icons.more-vert";
 import { db } from '../../lib/db';
 import { onSnapshot, collection, getDocs, query } from "firebase/firestore";
+import Link from 'next/link';
 
 export default function Home() {
     const [todos, setTodos] = useState([]);
@@ -18,6 +19,7 @@ export default function Home() {
                     const newTodos = [];
                     querySnapshot.forEach((doc) => {
                         newTodos.push({
+                            id: doc.id,
                             title: doc.data().title,
                             content: doc.data().content
                         });
@@ -33,7 +35,10 @@ export default function Home() {
             // keyを設定していないので、idなどを作り設定予定
             <ListItem>
                 <Checkbox />
-                <ListItemText primary={`${todo.title}：${todo.content}`} />
+                <ListItemText primary={`${todo.id}：${todo.title}：${todo.content}`} />
+                    <Link href={`/todos/${todo.id}`}>
+                        todo詳細へ
+                    </Link>
                 <MoreVert />
             </ListItem>
         )
