@@ -35,7 +35,7 @@ export default function Home() {
             // keyを設定していないので、idなどを作り設定予定
             <ListItem>
                 <Checkbox />
-                <ListItemText primary={`${todo.id}：${todo.title}：${todo.content}`} />
+                <ListItemText primary={`${todo.title}：${todo.content}`} />
                     <Link href={`/todos/${todo.id}`}>
                         todo詳細へ
                     </Link>
