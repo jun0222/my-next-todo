@@ -9,9 +9,9 @@ export default function Home() {
         // ドキュメントIDをurlに入れるので、userが一致していないとリダイレクトするようにする！
         <div>
             ・TODO削除<br />
-            ・コメント投稿機能
+            ・コメント投稿機能<br />
             <Link href={`/todos/${todoId}/edit`}>
-                todo詳細へ
+                todo編集へ
             </Link>
         </div>
     )
