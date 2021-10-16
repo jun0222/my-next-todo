@@ -37,9 +37,8 @@ export default function Home() {
                 <Checkbox />
                 <ListItemText primary={`${todo.title}：${todo.content}`} />
                     <Link href={`/todos/${todo.id}`}>
-                        todo詳細へ
+                        <MoreVert style={{cursor: "pointer"}} />
                     </Link>
-                <MoreVert />
             </ListItem>
         )
     })
