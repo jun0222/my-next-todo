@@ -1,4 +1,5 @@
 import { db } from '../../../../lib/db';
+import Link from 'next/link';
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
@@ -79,6 +80,15 @@ export default function Home() {
                     margin="normal"
                     onClick={updateTodosTask}
                 >更新</Button>
+                <Button
+                    variant="contained"
+                    type="submit"
+                    margin="normal"
+                >
+                    <Link href={`/todos/${id}`}>
+                        戻る
+                    </Link>
+                </Button>
                 </Grid>
             </Grid>
         </div>

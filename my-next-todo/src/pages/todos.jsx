@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Checkbox } from "@material-ui/core";
+import { Checkbox, Button } from "@material-ui/core";
 import MoreVert from "@bit/mui-org.material-ui-icons.more-vert";
 import { db } from '../../lib/db';
 import { onSnapshot, collection, getDocs, query } from "firebase/firestore";
 import Link from 'next/link';
+import { Grid } from '@material-ui/core';
 
 export default function Home() {
     const [todos, setTodos] = useState([]);
@@ -44,9 +45,24 @@ export default function Home() {
     })
     return (
         <>
+        <Grid container>
+            <Grid sm={2}/>
+            <Grid lg={8} sm={8} spacing={10}>
             <List component="nav">
                 {todoListItems}
             </List>
+            <Link href={`/todos/create`}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    margin="normal"
+                >
+                    新規作成
+                </Button>
+            </Link>
+            </Grid>
+        </Grid>
         </>
     )
 }

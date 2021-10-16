@@ -56,10 +56,20 @@ export default function Home() {
                 </Link>
                 <Button
                     variant="contained"
+                    color="secondary"
                     type="submit"
                     margin="normal"
                     onClick={deleteTodosTask}
                 >削除</Button>
+                <Button
+                    variant="contained"
+                    type="submit"
+                    margin="normal"
+                >
+                    <Link href="/todos">
+                        戻る
+                    </Link>
+                </Button>
                 </Grid>
             </Grid>
         </div>

@@ -65,12 +65,11 @@ export default function Home() {
                 >追加</Button>
                 <Button
                     variant="contained"
-                    color="primary"
                     type="submit"
                     margin="normal"
                 >
                     <Link href="/todos">
-                        todo一覧へ
+                        戻る
                     </Link>
                 </Button>
                 </Grid>
