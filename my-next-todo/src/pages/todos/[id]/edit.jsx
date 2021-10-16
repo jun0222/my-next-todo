@@ -9,18 +9,10 @@ import TextField from "@material-ui/core/TextField";
 export default function Home() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [id, setId] = useState('');
     const router = useRouter();
+    const id = router.asPath.split('/')[2];
 
-    // 初回レンダリング時以外（router.asPath !== router.routeがfalse）に、idをステートへセットする。
-    useEffect(() => {
-        if (router.asPath !== router.route) {
-            setId(router.query.id);
-        }
-    }, [router]);
-
-
-    // router.query.idから取得したidを元に、タイトルと本文の初期値を設定。
+    // idを元にタイトルと本文を取得。
     const getDefaultValue = async () =>{
         if (router.asPath !== router.route) {
             const docRef = doc(db, "todos", id);
