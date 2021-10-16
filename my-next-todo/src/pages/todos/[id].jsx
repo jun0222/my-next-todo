@@ -1,18 +1,76 @@
+import { db } from '../../../lib/db';
 import Link from 'next/link';
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
+import { Grid } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 
 export default function Home() {
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [id, setId] = useState('');
     const router = useRouter();
-    const todoId = router.query.id;
+
+    // 初回レンダリング時以外（router.asPath !== router.routeがfalse）に、idをステートへセットする。
+    useEffect(() => {
+        if (router.asPath !== router.route) {
+            setId(router.query.id);
+        }
+    }, [router]);
+
+
+    // router.query.idから取得したidを元に、タイトルと本文を取得。
+    const getValue = async () =>{
+        if (router.asPath !== router.route) {
+            const docRef = doc(db, "todos", id);
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists()) {
+                setTitle(docSnap.data().title);
+                setContent(docSnap.data().content);
+            }
+        }
+    }
+    useEffect(() => {
+        getValue()
+    },[id]);
+
+    // タスクを削除する関数
+    const deleteTodosTask = async () => {
+        await deleteDoc(doc(db, "todos", id));
+        window.alert(`タスクを削除しました`);
+        router.push('/todos')
+    }
 
     return (
-        // ドキュメントIDをurlに入れるので、userが一致していないとリダイレクトするようにする！
+        // todo:ドキュメントIDをurlに入れるので、userが一致していないとリダイレクトするようにする！
+        <>
         <div>
-            ・TODO削除<br />
-            ・コメント投稿機能<br />
-            <Link href={`/todos/${todoId}/edit`}>
-                todo編集へ
-            </Link>
+            <Grid container>
+                <Grid sm={2}/>
+                <Grid lg={8} sm={8} spacing={10}>
+                <h1>{title}</h1>
+                <p>{content}</p>
+                <Link href={`/todos/${id}/edit`}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        margin="normal"
+                    >
+                        編集
+                    </Button>
+                </Link>
+                <Button
+                    variant="contained"
+                    type="submit"
+                    margin="normal"
+                    onClick={deleteTodosTask}
+                >削除</Button>
+                </Grid>
+            </Grid>
         </div>
+        </>
     )
 }
