@@ -33,8 +33,7 @@ export default function Home() {
 
     const todoListItems = todos.map(todo => {
         return (
-            // keyを設定していないので、idなどを作り設定予定
-            <ListItem>
+            <ListItem key={todo.id}>
                 <Checkbox />
                 <ListItemText primary={`${todo.title}：${todo.content}`} />
                     <Link href={`/todos/${todo.id}`}>
