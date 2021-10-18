@@ -3,7 +3,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Checkbox, Button } from "@material-ui/core";
-import MoreVert from "@bit/mui-org.material-ui-icons.more-vert";
+import MoreVert from '@mui/icons-material/MoreVert';
 import { db } from '../../lib/db';
 import { onSnapshot, collection, getDocs, query } from "firebase/firestore";
 import Link from 'next/link';
