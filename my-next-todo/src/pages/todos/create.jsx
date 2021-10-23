@@ -1,10 +1,12 @@
+import { app } from '../../../lib/firebase';
+import { getFirestore } from 'firebase/firestore';
+import { collection, addDoc } from "firebase/firestore";
+import Link from 'next/link';
 import { Grid } from '@material-ui/core'
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { useState } from 'react';
-import Link from 'next/link';
-import { db } from '../../../lib/db';
-import { collection, addDoc } from "firebase/firestore";
+
 
 /* ・TODOタイトル候補<br />
 ・TODO作成 */
@@ -12,6 +14,7 @@ import { collection, addDoc } from "firebase/firestore";
 export default function Home() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const db = getFirestore(app);
 
     const addTaskToTodos = async () => {
         if (title === ""){

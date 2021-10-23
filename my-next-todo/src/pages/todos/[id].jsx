@@ -1,6 +1,7 @@
-import { db } from '../../../lib/db';
-import Link from 'next/link';
+import { app } from '../../../lib/firebase';
+import { getFirestore } from 'firebase/firestore';
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import { Grid } from '@material-ui/core';
@@ -11,6 +12,7 @@ export default function Home() {
     const [content, setContent] = useState('');
     const router = useRouter();
     const id = router.asPath.split('/')[2];
+    const db = getFirestore(app);
 
     // idを元にタイトルと本文を取得。
     const getValue = async () =>{

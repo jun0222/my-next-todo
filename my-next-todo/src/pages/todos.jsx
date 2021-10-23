@@ -1,16 +1,18 @@
+import { app } from '../../lib/firebase';
+import { getFirestore } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Checkbox, Button } from "@material-ui/core";
 import MoreVert from '@mui/icons-material/MoreVert';
-import { db } from '../../lib/db';
 import { onSnapshot, collection, getDocs, query } from "firebase/firestore";
 import Link from 'next/link';
 import { Grid } from '@material-ui/core';
 
 export default function Home() {
     const [todos, setTodos] = useState([]);
+    const db = getFirestore(app);
 
     useEffect(() => {
             const f = async () => {

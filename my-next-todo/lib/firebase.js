@@ -1,8 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import 'firebase/firestore';
 
-let db;
+let app;
 try {
     const config = {
             apiKey: process.env.FIREBASE_API_KEY,
@@ -13,12 +12,11 @@ try {
             messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
             appId: process.env.FIREBASE_APP_ID
         };
-        db = getFirestore(initializeApp(config));
-
+        app = initializeApp(config)
     } catch (error) {
         console.log(error);
     }
 
 module.exports = {
-    db
+    app
 };
