@@ -9,10 +9,14 @@ import MoreVert from '@mui/icons-material/MoreVert';
 import { onSnapshot, collection, getDocs, query } from "firebase/firestore";
 import Link from 'next/link';
 import { Grid } from '@material-ui/core';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 export default function Home() {
     const [todos, setTodos] = useState([]);
     const db = getFirestore(app);
+    const [isSignedIn, setIsSignedIn] = useState();
+    const [userEmail, setUserEmail] = useState('');
+    const auth = getAuth(app);
 
     useEffect(() => {
             const f = async () => {
@@ -44,11 +48,31 @@ export default function Home() {
             </ListItem>
         )
     })
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsSignedIn(true);
+                setUserEmail(user.email);
+            } else {
+                setIsSignedIn(false);
+                setUserEmail('');
+            }
+        })
+    }, []);
     return (
         <>
         <Grid container>
             <Grid sm={2}/>
             <Grid lg={8} sm={8} spacing={10}>
+            <List>
+                <ListItem>
+                    {isSignedIn ? (
+                        <div>{userEmail}さんこんにちは！mypage（signout含む）へのリンク</div>
+                    ):(
+                        <div>ゲストさんこんにちは！signinへのリンク</div>
+                    )}
+                </ListItem>
+            </List>
             <List component="nav">
                 {todoListItems}
             </List>
