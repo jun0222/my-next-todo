@@ -68,7 +68,13 @@ export default function Home() {
             <List>
                 <ListItem>
                     {isSignedIn ? (
-                        <div>{userEmail}さんこんにちは！mypage（signout含む）へのリンク
+                        <div>
+                            <span>{userEmail}さんこんにちは！</span>
+                            <span>
+                                <Link href={`/mypage`} >
+                                    <MuiLink color="inherit" style={{cursor: "pointer"}}>マイページ</MuiLink>
+                                </Link>
+                            </span>
                         </div>
                     ):(
                         <div>
