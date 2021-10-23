@@ -2,10 +2,12 @@ import { app } from '../../lib//firebase';
 import 'firebase/auth';
 import {useState, useEffect} from 'react';
 import {getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth';
+import { useRouter } from "next/router";
 
 export default function Home() {
     const [isSignedIn, setIsSignedIn] = useState();
     const auth = getAuth(app);
+    const router = useRouter();
 
     const handleSignIn = async (event) => {
         event.preventDefault();
@@ -13,7 +15,7 @@ export default function Home() {
         try {
             await signInWithEmailAndPassword(auth, email.value, password.value)
             console.log(email.value, password.value)
-            alert("Success sign in!!")
+            router.push('/todos');
         }catch (error) {
             console.log(error.message);
             alert("sign in error!!")
@@ -23,7 +25,6 @@ export default function Home() {
         event.preventDefault();
         try {
             const result = await signOut(auth);
-            console.log(result);
         }catch (error) {
             console.log(error);
         }
