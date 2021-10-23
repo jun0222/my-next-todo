@@ -17,7 +17,7 @@ export default function Home() {
                 password.value
             )
             alert(`会員登録完了しました。\n\nメールアドレス：${email.value}\nパスワード：********`)
-            router.push('/signin')
+            router.push('/todos')
         }catch (error) {
             alert("登録エラー")
             console.log(error);
