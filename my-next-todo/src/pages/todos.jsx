@@ -10,6 +10,7 @@ import { onSnapshot, collection, getDocs, query } from "firebase/firestore";
 import Link from 'next/link';
 import { Grid } from '@material-ui/core';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import { Link as MuiLink } from '@mui/material';
 
 export default function Home() {
     const [todos, setTodos] = useState([]);
@@ -67,9 +68,17 @@ export default function Home() {
             <List>
                 <ListItem>
                     {isSignedIn ? (
-                        <div>{userEmail}さんこんにちは！mypage（signout含む）へのリンク</div>
+                        <div>{userEmail}さんこんにちは！mypage（signout含む）へのリンク
+                        </div>
                     ):(
-                        <div>ゲストさんこんにちは！signinへのリンク</div>
+                        <div>
+                            <span>ゲストさんこんにちは！</span>
+                            <span>
+                                <Link href={`/signin`} >
+                                    <MuiLink color="inherit" style={{cursor: "pointer"}}>ログインする</MuiLink>
+                                </Link>
+                            </span>
+                        </div>
                     )}
                 </ListItem>
             </List>
