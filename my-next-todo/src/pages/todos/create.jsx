@@ -43,38 +43,37 @@ export default function Home() {
 
     return (
         <>
-            <Grid container>
-                <Grid sm={2}/>
-                <Grid lg={8} sm={8} spacing={10}>
-                <TextField
-                    placeholder="タイトル"
-                    margin="normal"
-                    value={title}
-                    onChange={getInputTextForTitle}
-                />
-                <TextField
-                    placeholder="内容"
-                    margin="normal"
-                    fullWidth
-                    value={content}
-                    onChange={getInputTextForContent}
-                />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    margin="normal"
-                    onClick={addTaskToTodos}
-                >追加</Button>
-                <Button
-                    variant="contained"
-                    type="submit"
-                    margin="normal"
-                >
-                    <Link href="/todos">
-                        戻る
-                    </Link>
-                </Button>
+            <Grid container justifyContent="center" >
+                <Grid sm={8}>
+                    <TextField
+                        placeholder="タイトル"
+                        margin="normal"
+                        value={title}
+                        onChange={getInputTextForTitle}
+                    />
+                    <TextField
+                        placeholder="内容"
+                        margin="normal"
+                        fullWidth
+                        value={content}
+                        onChange={getInputTextForContent}
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        margin="normal"
+                        onClick={addTaskToTodos}
+                    >追加</Button>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        margin="normal"
+                    >
+                        <Link href="/todos">
+                            戻る
+                        </Link>
+                    </Button>
                 </Grid>
             </Grid>
         </>

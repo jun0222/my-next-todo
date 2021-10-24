@@ -59,38 +59,37 @@ export default function Home() {
     return (
         // todo:ドキュメントIDをurlに入れるので、userが一致していないとリダイレクトするようにする！
         <div>
-            <Grid container>
-                <Grid sm={2}/>
-                <Grid lg={8} sm={8} spacing={10}>
-                <TextField
-                    placeholder="タイトル"
-                    margin="normal"
-                    value={title}
-                    onChange={getInputTextForTitle}
-                />
-                <TextField
-                    placeholder="内容"
-                    margin="normal"
-                    fullWidth
-                    value={content}
-                    onChange={getInputTextForContent}
-                />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    margin="normal"
-                    onClick={updateTodosTask}
-                >更新</Button>
-                <Button
-                    variant="contained"
-                    type="submit"
-                    margin="normal"
-                >
-                    <Link href={`/todos/${id}`}>
-                        戻る
-                    </Link>
-                </Button>
+            <Grid container justifyContent="center" >
+                <Grid sm={8}>
+                    <TextField
+                        placeholder="タイトル"
+                        margin="normal"
+                        value={title}
+                        onChange={getInputTextForTitle}
+                    />
+                    <TextField
+                        placeholder="内容"
+                        margin="normal"
+                        fullWidth
+                        value={content}
+                        onChange={getInputTextForContent}
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        margin="normal"
+                        onClick={updateTodosTask}
+                    >更新</Button>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        margin="normal"
+                    >
+                        <Link href={`/todos/${id}`}>
+                            戻る
+                        </Link>
+                    </Button>
                 </Grid>
             </Grid>
         </div>

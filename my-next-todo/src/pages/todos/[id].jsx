@@ -41,37 +41,36 @@ export default function Home() {
         // todo:ドキュメントIDをurlに入れるので、userが一致していないとリダイレクトするようにする！
         <>
         <div>
-            <Grid container>
-                <Grid sm={2}/>
-                <Grid lg={8} sm={8} spacing={10}>
-                <h1>{title}</h1>
-                <p>{content}</p>
-                <Link href={`/todos/${id}/edit`}>
+            <Grid container justifyContent="center" >
+                <Grid sm={8}>
+                    <h1>{title}</h1>
+                    <p>{content}</p>
+                    <Link href={`/todos/${id}/edit`}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            margin="normal"
+                        >
+                            編集
+                        </Button>
+                    </Link>
                     <Button
                         variant="contained"
-                        color="primary"
+                        color="secondary"
+                        type="submit"
+                        margin="normal"
+                        onClick={deleteTodosTask}
+                    >削除</Button>
+                    <Button
+                        variant="contained"
                         type="submit"
                         margin="normal"
                     >
-                        編集
+                        <Link href="/todos">
+                            戻る
+                        </Link>
                     </Button>
-                </Link>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
-                    margin="normal"
-                    onClick={deleteTodosTask}
-                >削除</Button>
-                <Button
-                    variant="contained"
-                    type="submit"
-                    margin="normal"
-                >
-                    <Link href="/todos">
-                        戻る
-                    </Link>
-                </Button>
                 </Grid>
             </Grid>
         </div>

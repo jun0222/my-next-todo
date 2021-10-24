@@ -62,9 +62,8 @@ export default function Home() {
     }, []);
     return (
         <>
-        <Grid container>
-            <Grid sm={2}/>
-            <Grid lg={8} sm={8} spacing={10}>
+        <Grid container justifyContent="center" >
+            <Grid sm={8}>
             <List>
                 <ListItem>
                     {isSignedIn ? (
