@@ -3,6 +3,9 @@ import 'firebase/auth';
 import {useState, useEffect} from 'react';
 import {getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth';
 import { useRouter } from "next/router";
+import { Grid } from '@material-ui/core';
+import { Button } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 
 export default function Home() {
     const [isSignedIn, setIsSignedIn] = useState();
@@ -43,28 +46,47 @@ export default function Home() {
     }, []);
     return (
         <>
-        <div>
-            {isSignedIn ? (
-                <form onSubmit={handleSignOut} >
-                    <input type="submit" value="sign out" />
-                </form>
-            ):(
-                <form style={{marginTop: '150px'}} onSubmit={handleSignIn}>
-                    <div>
-                        <label>Enter your email:</label>
-                        <input name="email" type="email"/>
-                    </div>
-                    <div>
-                        <label>Enter your passoword:</label>
-                        <input name="password" type="password"/>
-                    </div>
-                    <div>
-                        <label></label>
-                        <input type="submit" value="Sign in"/>
-                    </div>
-                </form>
-            )}
-        </div>
+        <Grid container justifyContent="center" >
+            <Grid sm={4}>
+                <div>
+                    {isSignedIn ? (
+                        <></>
+                    ):(
+                        <form style={{marginTop: '150px'}} onSubmit={handleSignIn}>
+                            <div>
+                                <TextField
+                                    fullWidth
+                                    placeholder="メールアドレス"
+                                    margin="normal"
+                                    name="email"
+                                    type="email"
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    fullWidth
+                                    placeholder="パスワード"
+                                    margin="normal"
+                                    name="password"
+                                    type="password"
+                                />
+                            </div>
+                            <div>
+                                <label></label>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    margin="normal"
+                                >
+                                    ログイン
+                                </Button>
+                            </div>
+                        </form>
+                    )}
+                </div>
+            </Grid>
+        </Grid>
         </>
     )
 }
